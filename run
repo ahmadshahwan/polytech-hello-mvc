@@ -1,0 +1,1 @@
+java -cp target/jars/*:target/hello.jar fr.polytech.hello.HelloApp

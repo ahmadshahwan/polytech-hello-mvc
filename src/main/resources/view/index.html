@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Page</title>
+    <script>
+        const headers = { "Content-Type": "application/json" };
+
+        function onLoad() {
+            const el = document.getElementById('greeting');
+            fetch("/api/greeting")
+                .then(response => response.json())
+                .then(body => el.innerText = body.message);
+        }
+
+        function login() {
+            const body = userAsJson("login");
+            fetch("/api/me", { method: "POST", body, headers})
+                .then(({ok}) => ok ? Promise.resolve() : Promise.reject())
+                .then(() => window.location.href = "/")
+                .catch(() => showElement("login-error"));
+        }
+
+        function logout() {
+            fetch("/api/me", { method: 'DELETE' })
+                .then(() => window.location.href = "/");
+        }
+
+        function create() {
+            const body = userAsJson("create");
+            fetch("/api/users", { method: "POST", body, headers })
+                .then(({ok}) => ok ? Promise.resolve() : Promise.reject())
+                .then(() => showElement("create-done"))
+                .catch(() => showElement("create-error"));
+        }
+
+        function update() {
+            const body = userAsJson("update");
+            fetch("/api/users", { method: "PUT", body, headers })
+                .then(({ok}) => ok ? Promise.resolve() : Promise.reject())
+                .then(() => showElement("update-done"))
+                .catch(() => showElement("update-error"));
+        }
+
+        function userAsJson(prefix) {
+            const username = document.getElementById(`${prefix}-username`).value
+            const password = document.getElementById(`${prefix}-password`).value
+            return JSON.stringify({ username, password });
+        }
+
+        function showElement(id) {
+            document.getElementById(id).style.display = "block";
+        }
+    </script>
+</head>
+<body onload="onLoad()">
+<h1 id="greeting">&nbsp;</h1>
+<div>
+    <h2>Login</h2>
+    <form autocomplete="off">
+        <label for="login-username">Username</label>
+        <input id="login-username"/>
+        <label for="login-password">Password</label>
+        <input id="login-password" type="password"/>
+        <input type="button" value="Go" onclick="login()" />
+        <p id="login-error" style="display: none">Login error</p>
+    </form>
+
+    <h2>New user</h2>
+    <form autocomplete="off">
+        <label for="create-username">Username</label>
+        <input id="create-username"/>
+        <label for="create-password">Password</label>
+        <input id="create-password" type="password"/>
+        <input type="button" value="Go" onclick="create()" />
+        <p id="create-error" style="display: none">Error creating user</p>
+        <p id="create-done" style="display: none">User created</p>
+    </form>
+
+    <h2>Update password</h2>
+    <form autocomplete="off">
+        <label for="update-username">Username</label>
+        <input id="update-username"/>
+        <label for="update-password">Password</label>
+        <input id="update-password" type="password"/>
+        <input type="button" value="Go" onclick="update()" />
+        <p id="update-error" style="display: none">Error updating password</p>
+        <p id="update-done" style="display: none">Password updated</p>
+    </form>
+
+    <h2>Logout</h2>
+    <form>
+        <input type="button" value="Go" onclick="logout()" />
+    </form>
+</div>
+
+</body>
+</html>

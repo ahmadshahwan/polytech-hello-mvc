@@ -1,0 +1,31 @@
+--- pom.xml	2023-04-06 20:39:47.298424234 +0200
++++ pom.xml	2023-04-06 19:52:35.198000000 +0200
+@@ -53,6 +53,28 @@
+             <groupId>jakarta.ws.rs</groupId>
+             <artifactId>jakarta.ws.rs-api</artifactId>
+         </dependency>
++
++        <!-- Runtime dependencies -->
++        <dependency>
++            <groupId>org.glassfish.jersey.core</groupId>
++            <artifactId>jersey-server</artifactId>
++            <scope>runtime</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.glassfish.jersey.containers</groupId>
++            <artifactId>jersey-container-jdk-http</artifactId>
++            <scope>runtime</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.glassfish.jersey.inject</groupId>
++            <artifactId>jersey-cdi2-se</artifactId>
++            <scope>runtime</scope>
++        </dependency>
++        <dependency>
++            <groupId>org.glassfish.jersey.media</groupId>
++            <artifactId>jersey-media-json-binding</artifactId>
++            <scope>runtime</scope>
++        </dependency>
+     </dependencies>
+ 
+     <build>
