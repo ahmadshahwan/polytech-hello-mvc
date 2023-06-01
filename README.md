@@ -27,26 +27,28 @@ Maven permet la gestion des dépendances logicielles d'une manière déclarative
 > À quoi sert la portée `runtime` dans la déclaration d'une dépendance maven ?
 
 
-## Application pour dire bonjour
+## Une application pour dire bonjour
 Une fois l'application est lancée, vous pouvez la visualiser sur l'adresse http://localhost:8080/.
 
-Il s'agit d'une application simple qui accueille l'utilisateur connecté avec son nom. Si aucun utilisateur n'est connecté, un message générique est affiché.
+Il s'agit d'une application simple qui accueille l'utilisateur connecté avec son nom. Si aucun utilisateur n'est connecté, une salutation générique est affichée.
 
 ## Injection de dépendance
-L'injection de dépendance est gérée au sein de l'application par la carde applicative. Le standard Jakarta CDI[^2] est utilisé pour la gestion d'injection.
+L'injection de dépendance est gérée au sein de l'application par la carde applicative. Le standard Jakarta CDI[^2] est utilisé à cette fin.
 
 > **Exercice 2**
 > 
-> Observez la classe `GreetingController`. De quoi dépend-elle ? Comment ses dépendances sont-elles injectées ?
+> Observez la classe `GreetingController`.
+> De quoi dépend une instance de cette classe ?
+> Comment ses dépendances sont-elles injectées ?
 > 
 > Observer la classe `LoggerFactory`.
 > À quoi sert l'annotation `@jakarta.enterprise.inject.Produces` ?
-> Qu'est-ce qu'elle représente la classe `InjectionPoint` ?
+> Qu'est-ce que représente la classe `InjectionPoint` ?
 > 
 > Modifiez le code pour injecter des journaux d'événement de type `ConsoleLogger` au lieu de `FileLogger`.
 
 ## Journaux avec suivi du temps
-On souhaite faire en sorte que les journaux, peu importe leurs type, affiche à côte de chaque message l'heure précise à laquelle le message a été produit.
+On souhaite faire en sorte que les journaux, peu importe leurs types, affichent à côte de chaque message l'heure précise à laquelle le message a été produit.
 
 > **Exercice 3**
 >
@@ -58,11 +60,11 @@ Le code est organisé selon l'architecture MVC : modèle-vue-contrôleur.
 
 > **Exercice 4**
 >
-> Identifiez dans le code les endroits (paquetages, sous-dossier) qui contiennent chaque de ces concepts : modèle, vue et contrôleur.
+> Identifiez dans le code les endroits (paquetages, sous-dossier) qui contiennent chacune de ces catégories : modèle, vue et contrôleur.
 > 
 > Le contrôleur `GreetingController` doit envoyer une salutation dédiée à l'utilisateur connecté s'il existe ou une salutation générique sinon.
 > 
-> À l'état actuel, le contrôleur salue toujours la même personne, John ! En regardant le code de plus prés, on voit que le contrôleur n'est pas branché au modèle.
+> À l'état actuel, le contrôleur salue toujours la même personne, John ! En regardant le code de plus près, on voit que le contrôleur n'est pas branché au modèle.
 > Modifiez la classe `GreetingController` pour permettre de saluer la personne connectée.
 > Attention, il est possible qu'aucun utilisateur ne soit connecté.
 
